@@ -13,10 +13,48 @@ contract P2PFileShare{
     struct FileInfo {
         uint idnumber;
         string ipfs; //file location on IPFS (gets the hash)
-        address uploader;       // Who posted it (Teacher/Student)
         string subject; // "CSCI 101.14" / "THEO 12" / "MSYS 41" 
         string fileName;        // "Assignment_1.pdf"
-        uint256 timestamp;      // When it was posted
+        address uploader;       // Who posted it (Teacher/Student)
     }
 
+    //mapping to store files (it acts like a hash table/dictionary
+    mapping(uint256 => FileInfo) public files;
+    uint256 public fileCount = 0;
+
+    //Event to notify when a file is uploaded
+    event FileUploaded(
+        uint idnumber,
+        string ipfs,
+        string indexed subject, // allows searching by Course subject
+        string fileName,
+        address indexed uploader //allows searching by uploader
+    );
+
+
+
+    //Function to upload the file
+    function uploadFile(string memory _ipfs, string memory _fileName, string memory _subject) public {
+        require(bytes(_ipfs).length > 0, "IPFS Hash is required");
+        require(bytes(_fileName).length > 0, "File Name is required");
+        require(bytes(_subject).length > 0, "Subject is required");
+
+        fileCount++;
+
+        files[fileCount] = FileInfo(
+            fileCount,
+            _ipfs,
+            _subject,
+            _fileName,
+            msg.sender
+        );
+
+        //emit is used to trigger the "event"
+        emit FileUploaded(fileCount,_ipfs,_subject,_fileName,msg.sender);
+    }
+
+    //function on getting the file details
+    function getFile(uint _idnumber) public view returns (FileInfo memory) {
+        return files[_idnumber];
+    }
 }
