@@ -5,18 +5,18 @@ If any Solidity language code or documentation used in our program was obtained 
 */
 
 // SPDX-License-Identifier: MIT
+// Decentralized file sharing system using IPFS hashes
 pragma solidity ^0.8.27;
 
 contract P2PFileShare{
-    enum Role {student, teacher}
-    
-    struct FileInfo{
+
+    struct FileInfo {
         uint idnumber;
+        string ipfs; //file location on IPFS (gets the hash)
         address uploader;       // Who posted it (Teacher/Student)
-        string subject;         // e.g., "CS101", "Math"
-        string fileName;        // e.g., "Assignment_1.pdf"
-        string Url;     // The link (Google Drive, Dropbox, etc.)
-        string hash;    // SHA-256 hash to prove file hasn't been modified
+        string subject; // "CSCI 101.14" / "THEO 12" / "MSYS 41" 
+        string fileName;        // "Assignment_1.pdf"
         uint256 timestamp;      // When it was posted
     }
+
 }
