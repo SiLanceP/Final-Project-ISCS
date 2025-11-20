@@ -133,8 +133,13 @@
 							}
 						],
 						"internalType": "struct P2PFileShare.FileInfo",
-						"name": "",
+						"name": "info",
 						"type": "tuple"
+					},
+					{
+						"internalType": "string",
+						"name": "downloadUrl",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -192,11 +197,11 @@
 	},
 	"sources": {
 		"Final Project/FinalProject_Contract.sol": {
-			"keccak256": "0xbd3e44b89676e18a97991b3445fe600f3024583b6654ba8441f36df657ae1536",
+			"keccak256": "0x4213f6f34822ce14d88028e3af15c430841a2eedb963c8bccd22d648cd6936f8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://25cdc353a552ff3c72bbdf82080150567e629b1559a95f1a5d8294cdf9a5f7bb",
-				"dweb:/ipfs/QmTS1pzBphU7LVHwZz84QawvUdqM2p6grx5mHBSqrRVakx"
+				"bzz-raw://b680c18bc5710d34452c7243583c2a4b6631457e3302308c5f9c1fe23436d51f",
+				"dweb:/ipfs/QmUN8QExMivKtgTvviwEye2Uk6xib3UJWdsfU7go9RbMFw"
 			]
 		}
 	},

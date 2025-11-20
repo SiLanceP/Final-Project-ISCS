@@ -22,6 +22,9 @@ contract P2PFileShare{
     mapping(uint256 => FileInfo) public files;
     uint256 public fileCount = 0;
 
+    //Base URL (to be used with the ipfs hash) (just copy this url + the hash and paste it on browser to grab the file) (no need to download ipfs desktop)
+    string constant baseGateway = "https://ipfs.io/ipfs/";
+
     //Event to notify when a file is uploaded
     event FileUploaded(
         uint idnumber,
@@ -39,8 +42,10 @@ contract P2PFileShare{
         require(bytes(_fileName).length > 0, "File Name is required");
         require(bytes(_subject).length > 0, "Subject is required");
 
+        //this counts the number of files have been uploaded to the contract
         fileCount++;
 
+        //show the details of the file uploaded
         files[fileCount] = FileInfo(
             fileCount,
             _ipfs,
@@ -54,7 +59,12 @@ contract P2PFileShare{
     }
 
     //function on getting the file details
-    function getFile(uint _idnumber) public view returns (FileInfo memory) {
-        return files[_idnumber];
+    function getFile(uint _idnumber) public view returns (FileInfo memory info, string memory downloadUrl) {
+        FileInfo memory file = files[_idnumber];
+
+        // this makes it possible to just copy the text itself and paste it on a browser
+        string memory fullUrl = string(abi.encodePacked(baseGateway, file.ipfs));
+
+        return (file, fullUrl);
     }
 }
