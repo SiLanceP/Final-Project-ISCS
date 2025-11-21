@@ -39,6 +39,8 @@ contract P2PFileShare{
 
     /// @notice Mapping that stores files by acting like a hash table/dictionary
     mapping(uint256 => FileInfo) public files;
+    /// @notice Mapping to be able to see the IDs of a specific subject
+    mapping(string => uint256[]) private courses;
 
     /// @notice Event that notifies upon successful file upload
     /// @param idnumber ID Number (either employee ID or student ID depending on uploader role)
@@ -76,6 +78,9 @@ contract P2PFileShare{
             msg.sender
         );
 
+        /// @dev Adds the new ID to the specific course's list
+        courses[_subject].push(fileCount);
+
         emit FileUploaded(fileCount, _ipfs, _subject, _fileName, msg.sender);
     }
 
@@ -90,5 +95,11 @@ contract P2PFileShare{
         string memory fullUrl = string(abi.encodePacked(BASE_GATEWAY, file.ipfs));
 
         return (file, fullUrl);
+    }
+
+    /// @notice Function to get FileIDs for a specific course
+    /// @param _subject official course code of that subject
+    function getCourse(string memory _subject) public view returns (uint256[] memory){
+        return courses[_subject];
     }
 }
