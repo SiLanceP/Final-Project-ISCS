@@ -11,7 +11,7 @@ pragma solidity ^0.8.27;
 /// @title Peer-to-Peer File Sharing System
 /// @author Shaan Graal Dayag, Jez Deign Gonzales, Bea Montaño, Lance Pequierda, Jeanne Regala
 /// @notice System for managing files in an academic setting
- 
+
 /// @notice Contract for the system
 contract P2PFileShare{
     /// @notice Base URL (to be used with the IPFS hash)
@@ -23,14 +23,13 @@ contract P2PFileShare{
     uint256 public fileCount = 0;
 
     /// @notice Structure representing metadata information of the file being shared
-    /// @notice idnumber    ID Number (either employee ID or student ID depending on uploader role)
-    /// @notice ipfs        hash of the file location on IPFShash of the file location on IPFS
-    /// @notice subject     official subject code for the subject the file is for (ex: "CSCI 101.14",
-    ///                     "THEO 12", "MSYS 41")
-    /// @notice fileName    name of the file including the filetype extension (ex: "Assignment_1.pdf")
-    /// @notice uploader    address of the uploader
+    /// @notice fileID Unique file identifier
+    /// @notice ipfs Hash of the file location on IPFS
+    /// @notice subject Official subject code for the subject the file is for (ex: "CSCI 101.14", "THEO 12", "MSYS 41")
+    /// @notice fileName Name of the file including the filetype extension (ex: "Assignment_1.pdf")
+    /// @notice uploader Address of the uploader
     struct FileInfo {
-        uint idnumber;
+        uint fileID;
         string ipfs;
         string subject;
         string fileName;
@@ -39,28 +38,38 @@ contract P2PFileShare{
 
     /// @notice Mapping that stores files by acting like a hash table/dictionary
     mapping(uint256 => FileInfo) public files;
+
     /// @notice Mapping to be able to see the IDs of a specific subject
-    mapping(string => uint256[]) private courses;
+    mapping(string => uint256[]) private _courses;
 
     /// @notice Event that notifies upon successful file upload
-    /// @param idnumber ID Number (either employee ID or student ID depending on uploader role)
-    /// @param ipfs hash of the file location on IPFS
-    /// @param subject indexed, allows searching by subject course code; official course code for the subject the 
-    ///                file is for (ex: "CSCI 101.14", "THEO 12", "MSYS 41")
-    /// @param fileName name of the file including the filetype extension (ex: "Assignment_1.pdf")
-    /// @param uploader indexed, allows searching by uploader; address of the uploader
+    /// @param fileID Unique file identifier
+    /// @param ipfs Hash of the file location on IPFS
+    /// @param subject Allows searching by subject course code; official course code for the subject the file is for (ex: "CSCI 101.14", "THEO 12", "MSYS 41")
+    /// @param fileName Name of the file including the filetype extension (ex: "Assignment_1.pdf")
+    /// @param uploader Allows searching by uploader; address of the uploader
     event FileUploaded(
-        uint idnumber,
+        uint fileID,
         string ipfs,
         string indexed subject,
         string fileName,
         address indexed uploader
     );
-    
+
+    /// @notice Event that notifies upon successful file download
+    /// @param _fileID Unique file identifier
+    /// @param info Information of file being downloaded
+    /// @param downloadUrl Download link for the file
+    event FileDownloaded(
+        uint _fileID,
+        FileInfo info,
+        string downloadUrl
+    );
+
     /// @notice Function to upload the file
     /// @param _ipfs IPFS file location hash for the file
-    /// @param _fileName filename with filetype extension
-    /// @param _subject official course code for the subject that file is being uploaded for
+    /// @param _fileName Filename with filetype extension
+    /// @param _subject Official course code for the subject that file is being uploaded for
     function uploadFile(string memory _ipfs, string memory _fileName, string memory _subject) public {
         require(bytes(_ipfs).length > 0, "IPFS Hash is required");
         require(bytes(_fileName).length > 0, "File Name is required");
@@ -81,24 +90,28 @@ contract P2PFileShare{
         /// @dev Adds the new ID to the specific course's list
         courses[_subject].push(fileCount);
 
+        /// @dev Log successful file upload
         emit FileUploaded(fileCount, _ipfs, _subject, _fileName, msg.sender);
     }
 
     /// @notice Function that returns the file details
-    /// @param _idnumber idnumber of the uploader
-    /// @return info metadata from the uploaded file
+    /// @param _fileID File ID for the file being downloaded
+    /// @return info Metadata from the uploaded file
     /// @return downloadUrl URL that allows users to download the file
-    function getFile(uint _idnumber) public view returns (FileInfo memory info, string memory downloadUrl) {
-        FileInfo memory file = files[_idnumber];
+    function getFile(uint _fileID) public view returns (FileInfo memory info, string memory downloadUrl) {
+        FileInfo memory file = files[_fileID];
 
         /// @dev This makes it possible to just copy the text itself and paste it on a browser
         string memory fullUrl = string(abi.encodePacked(BASE_GATEWAY, file.ipfs));
+
+        /// @dev Log successful file download
+        emit FileDownloaded(file, fullUrl);
 
         return (file, fullUrl);
     }
 
     /// @notice Function to get FileIDs for a specific course
-    /// @param _subject official course code of that subject
+    /// @param _subject Official course code of that subject
     function getCourse(string memory _subject) public view returns (uint256[] memory){
         return courses[_subject];
     }
