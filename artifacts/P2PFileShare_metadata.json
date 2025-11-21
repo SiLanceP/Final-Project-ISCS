@@ -97,6 +97,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_subject",
+						"type": "string"
+					}
+				],
+				"name": "getCourse",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_idnumber",
 						"type": "uint256"
@@ -197,11 +216,11 @@
 	},
 	"sources": {
 		"Final Project/FinalProject_Contract.sol": {
-			"keccak256": "0xcd53662dbd6befada55a50c1366463f551870b40584e94d3bcd07517b899d1d4",
+			"keccak256": "0xf72392573e70bccec7f726b6717b1be23f7ea9ac262a96f96a2a51d5a5d13676",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e80979571119fc8306447acf83907302e05f99a8c6f3a05eeb8392412a30a821",
-				"dweb:/ipfs/QmRSTvMxag7VCVNkU1Ur8C7HYSJ5jZxkscTnS8XEuVC1ow"
+				"bzz-raw://022f24e82243fa1ddd9f361a9193b8bcc687c85f70c22303f6919dc4230b6bd5",
+				"dweb:/ipfs/QmVMAwQMuvmmB57bv9peLVMnGaQXqMWQUpzprTZAb9T8J8"
 			]
 		}
 	},

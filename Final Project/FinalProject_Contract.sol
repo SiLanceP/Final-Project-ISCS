@@ -22,6 +22,9 @@ contract P2PFileShare{
     mapping(uint256 => FileInfo) public files;
     uint256 public fileCount = 0;
 
+    //to be able to see the IDs of a specific subject
+    mapping(string => uint256[]) private courses;
+
     //Base URL (to be used with the ipfs hash) (just copy this url + the hash and paste it on browser to grab the file) (no need to download ipfs desktop)
     string constant baseGateway = "https://ipfs.io/ipfs/";
 
@@ -54,6 +57,9 @@ contract P2PFileShare{
             msg.sender
         );
 
+        //This adds the new ID to the specific course's list
+        courses[_subject].push(fileCount);
+
         //emit is used to trigger the "event"
         emit FileUploaded(fileCount,_ipfs,_subject,_fileName,msg.sender);
     }
@@ -66,5 +72,10 @@ contract P2PFileShare{
         string memory fullUrl = string(abi.encodePacked(baseGateway, file.ipfs));
 
         return (file, fullUrl);
+    }
+
+    //function to get FileIDs for a specific course
+    function getCourse(string memory _subject) public view returns (uint256[] memory){
+        return courses[_subject];
     }
 }
