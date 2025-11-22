@@ -1,4 +1,5 @@
 Steps in testing
+
 NOTE: Download IPFS Desktop (It's Free) (This is for the Uploader)
 1.  Open IPFS Desktop
 2.  Click the Files
