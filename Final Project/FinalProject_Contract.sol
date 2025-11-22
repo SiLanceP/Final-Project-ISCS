@@ -88,7 +88,7 @@ contract P2PFileShare{
         );
 
         /// @dev Adds the new ID to the specific course's list
-        courses[_subject].push(fileCount);
+        _courses[_subject].push(fileCount);
 
         /// @dev Log successful file upload
         emit FileUploaded(fileCount, _ipfs, _subject, _fileName, msg.sender);
@@ -113,6 +113,6 @@ contract P2PFileShare{
     /// @notice Function to get FileIDs for a specific course
     /// @param _subject Official course code of that subject
     function getCourse(string memory _subject) public view returns (uint256[] memory){
-        return courses[_subject];
+        return _courses[_subject];
     }
 }
