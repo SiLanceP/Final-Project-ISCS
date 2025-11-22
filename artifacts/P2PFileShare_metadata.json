@@ -11,58 +11,6 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "_fileID",
-						"type": "uint256"
-					},
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "fileID",
-								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "ipfs",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "subject",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "fileName",
-								"type": "string"
-							},
-							{
-								"internalType": "address",
-								"name": "uploader",
-								"type": "address"
-							}
-						],
-						"indexed": false,
-						"internalType": "struct P2PFileShare.FileInfo",
-						"name": "info",
-						"type": "tuple"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "downloadUrl",
-						"type": "string"
-					}
-				],
-				"name": "FileDownloaded",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "uint256",
 						"name": "fileID",
 						"type": "uint256"
 					},
@@ -254,13 +202,6 @@
 		],
 		"devdoc": {
 			"events": {
-				"FileDownloaded(uint256,(uint256,string,string,string,address),string)": {
-					"params": {
-						"_fileID": "Unique file identifier",
-						"downloadUrl": "Download link for the file",
-						"info": "Information of file being downloaded"
-					}
-				},
 				"FileUploaded(uint256,string,string,string,address)": {
 					"params": {
 						"fileID": "Unique file identifier",
@@ -304,9 +245,6 @@
 		},
 		"userdoc": {
 			"events": {
-				"FileDownloaded(uint256,(uint256,string,string,string,address),string)": {
-					"notice": "Event that notifies upon successful file download"
-				},
 				"FileUploaded(uint256,string,string,string,address)": {
 					"notice": "Event that notifies upon successful file upload"
 				}
@@ -350,11 +288,11 @@
 	},
 	"sources": {
 		"Final Project/FinalProject_Contract.sol": {
-			"keccak256": "0x9ef143d1b42685964d0b737398682d7e3f05b84c63c11504480a29fa8f90701c",
+			"keccak256": "0x46070957c78d9d838e5a6331e09744ddc441f9aea3c6ea199a949cb5fa99ec37",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7847761ab81be75b3479f62c086582db66284e5a9f77e4afd7a2d40a3fb22361",
-				"dweb:/ipfs/Qmd5jRpKpkGRsD2hW6kic3aU5GZgpmqy2ZcudjnRomRs8P"
+				"bzz-raw://4564a02c32782166aaa24fa9e0a53835f5efc33397a7fabbd1d60e39617ae138",
+				"dweb:/ipfs/QmSAs47atWHNkJ4YWzWF6Je1eTpRdksYzH8Ti9YWHaEGmG"
 			]
 		}
 	},

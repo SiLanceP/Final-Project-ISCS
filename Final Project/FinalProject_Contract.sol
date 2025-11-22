@@ -64,16 +64,6 @@ contract P2PFileShare{
         address indexed uploader
     );
 
-    /// @notice Event that notifies upon successful file download
-    /// @param _fileID Unique file identifier
-    /// @param info Information of file being downloaded
-    /// @param downloadUrl Download link for the file
-    event FileDownloaded(
-        uint _fileID,
-        FileInfo info,
-        string downloadUrl
-    );
-
     /// @notice Function to upload the file
     /// @param _ipfs IPFS file location hash for the file
     /// @param _fileName Filename with filetype extension
