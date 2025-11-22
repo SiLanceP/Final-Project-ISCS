@@ -11,7 +11,59 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "idnumber",
+						"name": "_fileID",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "fileID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "ipfs",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "subject",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "fileName",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "uploader",
+								"type": "address"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct P2PFileShare.FileInfo",
+						"name": "info",
+						"type": "tuple"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "downloadUrl",
+						"type": "string"
+					}
+				],
+				"name": "FileDownloaded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fileID",
 						"type": "uint256"
 					},
 					{
@@ -67,7 +119,7 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "idnumber",
+						"name": "fileID",
 						"type": "uint256"
 					},
 					{
@@ -105,9 +157,36 @@
 				"name": "getCourse",
 				"outputs": [
 					{
-						"internalType": "uint256[]",
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "fileID",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "ipfs",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "subject",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "fileName",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "uploader",
+								"type": "address"
+							}
+						],
+						"internalType": "struct P2PFileShare.FileInfo[]",
 						"name": "",
-						"type": "uint256[]"
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -117,7 +196,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_idnumber",
+						"name": "_fileID",
 						"type": "uint256"
 					}
 				],
@@ -127,7 +206,7 @@
 						"components": [
 							{
 								"internalType": "uint256",
-								"name": "idnumber",
+								"name": "fileID",
 								"type": "uint256"
 							},
 							{
@@ -161,7 +240,7 @@
 						"type": "string"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -189,13 +268,86 @@
 			}
 		],
 		"devdoc": {
+			"events": {
+				"FileDownloaded(uint256,(uint256,string,string,string,address),string)": {
+					"params": {
+						"_fileID": "Unique file identifier",
+						"downloadUrl": "Download link for the file",
+						"info": "Information of file being downloaded"
+					}
+				},
+				"FileUploaded(uint256,string,string,string,address)": {
+					"params": {
+						"fileID": "Unique file identifier",
+						"fileName": "Name of the file including the filetype extension (ex: \"Assignment_1.pdf\")",
+						"ipfs": "Hash of the file location on IPFS",
+						"subject": "Allows searching by subject course code; official course code for the subject the file is for (ex: \"CSCI 101.14\", \"THEO 12\", \"MSYS 41\")",
+						"uploader": "Allows searching by uploader; address of the uploader"
+					}
+				}
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"getCourse(string)": {
+					"params": {
+						"_subject": "Official course code of that subject"
+					},
+					"returns": {
+						"_0": "An array containing FileIDs and Names "
+					}
+				},
+				"getFile(uint256)": {
+					"params": {
+						"_fileID": "File ID for the file being downloaded"
+					},
+					"returns": {
+						"downloadUrl": "URL that allows users to download the file",
+						"info": "Metadata from the uploaded file"
+					}
+				},
+				"uploadFile(string,string,string)": {
+					"params": {
+						"_fileName": "Filename with filetype extension",
+						"_ipfs": "IPFS file location hash for the file",
+						"_subject": "Official course code for the subject that file is being uploaded for"
+					}
+				}
+			},
+			"stateVariables": {
+				"BASE_GATEWAY": {
+					"details": "(Copy this url + the hash and paste it in browser to grab the file)(No need to download IPFS desktop)"
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
+			"events": {
+				"FileDownloaded(uint256,(uint256,string,string,string,address),string)": {
+					"notice": "Event that notifies upon successful file download"
+				},
+				"FileUploaded(uint256,string,string,string,address)": {
+					"notice": "Event that notifies upon successful file upload"
+				}
+			},
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"fileCount()": {
+					"notice": "fileCount   number of files in the system"
+				},
+				"files(uint256)": {
+					"notice": "Mapping that stores files by acting like a hash table/dictionary"
+				},
+				"getCourse(string)": {
+					"notice": "Function to get FileIDs and File Names for a specific course"
+				},
+				"getFile(uint256)": {
+					"notice": "Function that returns the file details"
+				},
+				"uploadFile(string,string,string)": {
+					"notice": "Function to upload the file"
+				}
+			},
+			"notice": "Contract for the system",
 			"version": 1
 		}
 	},
@@ -216,11 +368,11 @@
 	},
 	"sources": {
 		"Final Project/FinalProject_Contract.sol": {
-			"keccak256": "0xf72392573e70bccec7f726b6717b1be23f7ea9ac262a96f96a2a51d5a5d13676",
+			"keccak256": "0xd0fd8b80b353a17b618e0d7f5d64efc28bab6796c7af4248af6900a0e933f366",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://022f24e82243fa1ddd9f361a9193b8bcc687c85f70c22303f6919dc4230b6bd5",
-				"dweb:/ipfs/QmVMAwQMuvmmB57bv9peLVMnGaQXqMWQUpzprTZAb9T8J8"
+				"bzz-raw://90f2fdb11cb98f1efb01cb63a8408e4b1452e775758cafbeadb6a3a0e066d1b7",
+				"dweb:/ipfs/QmZ3Z94rvPk8rdMyTpotMrfAuABGRLqxSFJx1BE9wYc2uk"
 			]
 		}
 	},

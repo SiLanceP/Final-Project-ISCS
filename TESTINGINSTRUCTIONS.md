@@ -2,7 +2,7 @@ Steps in testing
 
 NOTE: Download IPFS Desktop (It's Free) (This is for the Uploader)
 1.  Open IPFS Desktop
-2.  Click the Files
+2.  Click the "Files" on the left side bar
 3.  Upload a file on IPFS Desktop using the Import Button or drag the File to the Application
 4.  Click on the Three Dots on the right side of the File
 5.  Grab the CID of the uploaded file
