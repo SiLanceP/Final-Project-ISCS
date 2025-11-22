@@ -50,9 +50,6 @@ contract P2PFileShare{
     /// @notice Mapping to be able to see the IDs of a specific subject
     mapping(string => uint256[]) private _courses;
 
-    //Base URL (to be used with the ipfs hash) (just copy this url + the hash and paste it on browser to grab the file) (no need to download ipfs desktop)
-    string constant baseGateway = "https://ipfs.io/ipfs/";
-
     /// @notice Event that notifies upon successful file upload
     /// @param fileID Unique file identifier
     /// @param ipfs Hash of the file location on IPFS
