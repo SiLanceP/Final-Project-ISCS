@@ -37,6 +37,8 @@ contract P2PFileShare{
     }
 
     ///@notice Struct for getCourse (to show FileID and FileName
+    ///@notice fileID unique file identifier
+    ///@notice filename Name of the file
     struct FileSummary {
         uint fileID;
         string fileName;
