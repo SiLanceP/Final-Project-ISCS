@@ -38,7 +38,7 @@ contract P2PFileShare{
 
     ///@notice Struct for getCourse (to show FileID and FileName
     ///@notice fileID unique file identifier
-    ///@notice filename Name of the file
+    ///@notice filename Name of the file 
     struct FileSummary {
         uint fileID;
         string fileName;
@@ -109,14 +109,11 @@ contract P2PFileShare{
     /// @param _fileID File ID for the file being downloaded
     /// @return info Metadata from the uploaded file
     /// @return downloadUrl URL that allows users to download the file
-    function getFile(uint _fileID) public returns (FileInfo memory info, string memory downloadUrl) {
+    function getFile(uint _fileID) public view returns (FileInfo memory info, string memory downloadUrl) {
         FileInfo memory file = files[_fileID];
 
         /// @dev This makes it possible to just copy the text itself and paste it on a browser
         string memory fullUrl = string(abi.encodePacked(BASE_GATEWAY, file.ipfs));
-
-        /// @dev Log successful file download
-        emit FileDownloaded(_fileID, file, fullUrl);
 
         return (file, fullUrl);
     }
