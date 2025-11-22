@@ -109,9 +109,9 @@ contract P2PFileShare{
     /// @param _subject Official course code of that subject
     function getCourse(string memory _subject) public view returns (FileSummary[] memory){
         uint256[] memory ids = _courses[_subject];
-        // Create a temporary array to hold the results
+        // @dev Create a temporary array to hold the results
         FileSummary[] memory result = new FileSummary[](ids.length);
-        // Loop through IDs and populate the result array
+        // @dev Loop through IDs and populate the result array
         for (uint i = 0; i < ids.length; i++) {
             uint currentId = ids[i];
             result[i] = FileSummary(currentId, files[currentId].fileName);
