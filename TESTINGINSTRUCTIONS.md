@@ -17,5 +17,6 @@ NOTE: Download IPFS Desktop (It's Free) (This is for the Uploader)
 14.  Copy the URL after completing the transaction
 15.  Paste the URL in any browser
     NOTE: If it says 504 Gateway Timeout, just refresh the page
-    NOTE: You can copy the CID itself from the getFile and paste it on the IPFS Desktop to get the File (If the receiver has IPFS Desktop Installed)
-16. File is displayed in the browser
+
+NOTE: You can copy the CID itself from the getFile and paste it on the IPFS Desktop to get the File (If the receiver has IPFS Desktop Installed)
+17. File is displayed in the browser
