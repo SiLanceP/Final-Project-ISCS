@@ -165,26 +165,11 @@
 							},
 							{
 								"internalType": "string",
-								"name": "ipfs",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "subject",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
 								"name": "fileName",
 								"type": "string"
-							},
-							{
-								"internalType": "address",
-								"name": "uploader",
-								"type": "address"
 							}
 						],
-						"internalType": "struct P2PFileShare.FileInfo[]",
+						"internalType": "struct P2PFileShare.FileSummary[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -291,9 +276,6 @@
 				"getCourse(string)": {
 					"params": {
 						"_subject": "Official course code of that subject"
-					},
-					"returns": {
-						"_0": "An array containing FileIDs and Names "
 					}
 				},
 				"getFile(uint256)": {
@@ -338,7 +320,7 @@
 					"notice": "Mapping that stores files by acting like a hash table/dictionary"
 				},
 				"getCourse(string)": {
-					"notice": "Function to get FileIDs and File Names for a specific course"
+					"notice": "Function to get FileIDs for a specific course"
 				},
 				"getFile(uint256)": {
 					"notice": "Function that returns the file details"
@@ -368,11 +350,11 @@
 	},
 	"sources": {
 		"Final Project/FinalProject_Contract.sol": {
-			"keccak256": "0xd0fd8b80b353a17b618e0d7f5d64efc28bab6796c7af4248af6900a0e933f366",
+			"keccak256": "0xd1543b3b6a5156403392cec8d528c93acccf8726f45fcb18cb456e5fbd954b36",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://90f2fdb11cb98f1efb01cb63a8408e4b1452e775758cafbeadb6a3a0e066d1b7",
-				"dweb:/ipfs/QmZ3Z94rvPk8rdMyTpotMrfAuABGRLqxSFJx1BE9wYc2uk"
+				"bzz-raw://e548edf3d6f501961390fe0c8509d90985b39477c7cdd6fa37aa28e62d7990a6",
+				"dweb:/ipfs/QmSJGr3defUcHdVSH1Rmmru6dj9kMKWAMciSVU1xNcrWon"
 			]
 		}
 	},
